@@ -8,7 +8,7 @@ import NotFoundPage from './pages/NotFoundPage'
 
 function App() {
     return (
-        <div className="w-full h-full text-white">
+        <div className="w-full h-full text-textColor">
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/signup" element={<SignUpPage />} />

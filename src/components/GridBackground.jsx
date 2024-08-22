@@ -1,6 +1,6 @@
 const GridBackground = ({ children }) => {
     return (
-        <div className="w-screen h-screen bg-[#121212] text-white relative">
+        <div className="w-screen h-screen bg-backgroundColor text-white relative">
             {children}
         </div>
     )
