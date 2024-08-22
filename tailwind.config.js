@@ -6,7 +6,8 @@ module.exports = {
         colors: {
           backgroundColor: '#05151d',
           cardColor: '#1a2730',
-          textColor: '#c1cbd0'
+          textColor: '#c1cbd0',
+          descriptionColor: '#a1a6a9'
         }
       },
     },

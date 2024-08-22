@@ -2,6 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
+/* width */
+::-webkit-scrollbar {
+    width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #6c6c6c;
+}
+
+* {
+    scrollbar-color: auto;
+}
+
+*:hover {
+    scrollbar-color: auto;
+}
+
 @layer components {
     .flex-center {
         display: flex;

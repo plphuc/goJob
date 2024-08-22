@@ -9,12 +9,12 @@ import {
 
 const HeaderLayout = () => {
     return (
-        <div className="h-full flex-center justify-between pt-2">
-            <div className="left-header flex items-center gap-3">
+        <div className="h-full flex-center justify-between pt-3">
+            <div className="left-header flex items-center gap-3 justify-between">
                 <div className="logo h-full max-h-[50px] max-w-[50px]">
                     <Logo />
                 </div>
-                <div className="search">
+                <div className="search flex-1 w-[400px]">
                     <label className="input input-bordered flex items-center gap-2 bg-cardColor">
                         <input
                             type="text"
@@ -26,26 +26,29 @@ const HeaderLayout = () => {
                 </div>
             </div>
             <div className="right-header flex items-center">
-                <div className="navbar">
+                <div className="navbar flex items-center gap-3 mr-3">
                     <button className="btn rounded-full px-1 mr-2">
                         <a href="/" className="min-w-[70px]">
-                            <HomeOutlined/>
-                            <p className="">Home</p>
+                            <HomeOutlined />
+                            <p className="mt-1">Home</p>
                         </a>
                     </button>
                     <button className="btn btn-ghost text-textColor px-2">
                         <a href="/my-network">
-                            <TeamOutlined className='text-2xl'/>
+                            <TeamOutlined className="text-2xl" />
+                            <p className="mt-1">My Network</p>
                         </a>
                     </button>
                     <button className="btn btn-ghost text-textColor px-2">
                         <a href="/my-network">
-                            <PlusCircleFilled className='text-2xl'/>
+                            <PlusCircleFilled className="text-2xl" />
+                            <p className="mt-1">Create CV</p>
                         </a>
                     </button>
                     <button className="btn btn-ghost text-textColor px-2">
                         <a href="/my-network">
-                            <BellFilled className='text-2xl'/>
+                            <BellFilled className="text-2xl" />
+                            <p className="mt-1">Notifications</p>
                         </a>
                     </button>
                 </div>
