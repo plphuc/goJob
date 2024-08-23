@@ -112,5 +112,100 @@ const Article = ({ customClassName }) => {
         </svg>
     )
 }
+const Love = ({ customClassName }) => {
+    return (
+        <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className={`${customClassName}`}
+        >
+            <path
+                opacity="1"
+                d="M18 18.86H17.24C16.44 18.86 15.68 19.17 15.12 19.73L13.41 21.42C12.63 22.19 11.36 22.19 10.58 21.42L8.87 19.73C8.31 19.17 7.54 18.86 6.75 18.86H6C4.34 18.86 3 17.53 3 15.89V4.98001C3 3.34001 4.34 2.01001 6 2.01001H18C19.66 2.01001 21 3.34001 21 4.98001V15.89C21 17.52 19.66 18.86 18 18.86Z"
+                fill="#c1cbd0"
+            />
+            <path
+                d="M12.28 14.96C12.13 15.01 11.88 15.01 11.72 14.96C10.42 14.51 7.5 12.66 7.5 9.51001C7.5 8.12001 8.62 7 10 7C10.82 7 11.54 7.39 12 8C12.46 7.39 13.18 7 14 7C15.38 7 16.5 8.12001 16.5 9.51001C16.49 12.66 13.58 14.51 12.28 14.96Z"
+                fill="red"
+            />
+        </svg>
+    )
+}
 
-export { Logo, Search, Photo, Article }
+const CommentIcon = ({ customClassName }) => {
+    return (
+        <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className={`${customClassName}`}
+        >
+            <g clip-path="url(#clip0_429_11106)">
+                <path
+                    d="M12 21C16.9706 21 21 16.9705 21 12C21 7.02941 16.9706 2.99997 12 2.99997C7.02944 2.99997 3 7.02941 3 12C3 13.4876 3.36093 14.8909 4 16.1272L3 21L7.8728 20C9.10904 20.639 10.5124 21 12 21Z"
+                    stroke="#c1cbd0"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+                <rect
+                    x="7.5"
+                    y="12"
+                    width="0.01"
+                    height="0.01"
+                    stroke="#c1cbd0"
+                    stroke-width="3.75"
+                    stroke-linejoin="round"
+                />
+                <rect
+                    x="12"
+                    y="12"
+                    width="0.01"
+                    height="0.01"
+                    stroke="#c1cbd0"
+                    stroke-width="3.75"
+                    stroke-linejoin="round"
+                />
+                <rect
+                    x="16.5"
+                    y="12"
+                    width="0.01"
+                    height="0.01"
+                    stroke="#c1cbd0"
+                    stroke-width="3.75"
+                    stroke-linejoin="round"
+                />
+            </g>
+            <defs>
+                <clipPath id="clip0_429_11106">
+                    <rect width="24" height="24" fill="white" />
+                </clipPath>
+            </defs>
+        </svg>
+    )
+}
+
+const ShareIcon = ({ customClassName }) => {
+    return (
+        <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className={`${customClassName}`}
+        >
+            <g id="Communication / Share_Android">
+                <path
+                    id="Vector"
+                    d="M9 13.5L15 16.5M15 7.5L9 10.5M18 21C16.3431 21 15 19.6569 15 18C15 16.3431 16.3431 15 18 15C19.6569 15 21 16.3431 21 18C21 19.6569 19.6569 21 18 21ZM6 15C4.34315 15 3 13.6569 3 12C3 10.3431 4.34315 9 6 9C7.65685 9 9 10.3431 9 12C9 13.6569 7.65685 15 6 15ZM18 9C16.3431 9 15 7.65685 15 6C15 4.34315 16.3431 3 18 3C19.6569 3 21 4.34315 21 6C21 7.65685 19.6569 9 18 9Z"
+                    stroke="#c1cbd0"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+            </g>
+        </svg>
+    )
+}
+
+export { Logo, Search, Photo, Article, Love, CommentIcon, ShareIcon }

@@ -1,0 +1,16 @@
+.action {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex: 1;
+    @apply text-textColor bg-btnColor border-btnColor
+}
+
+.action:hover {
+    background-color: #1d2a34;
+    border-color: #1d2a34;
+}
+
+.action-icon {
+    @apply h-6 w-6
+}
