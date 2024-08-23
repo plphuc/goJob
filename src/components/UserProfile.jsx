@@ -1,6 +1,7 @@
 import React from 'react'
+import '../assets/css/userProfile.css'
 
-const UserProfile = ({name, username, avatar}) => {
+const UserProfile = ({ name, username, avatar }) => {
     return (
         <div className="user-profile flex-center justify-between gap-3">
             <div className="avt">

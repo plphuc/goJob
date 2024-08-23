@@ -16,7 +16,7 @@ const SiderLayout = () => {
                     <h2 className="card-title">
                         <div className="avatar flex items-center gap-3">
                             <div className="w-[50px] h-[50px] rounded-full">
-                                <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                                <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" alt='user-avt'/>
                             </div>
                             <div className="flex flex-col justify-start">
                                 <p className="text-xl text-textColor">Daisy</p>
@@ -34,10 +34,13 @@ const SiderLayout = () => {
                     </div>
                 </div>
             </div>
-            <div className="card shadow-xl w-full bg-cardColor">
-                <div className="card-body py-5">
+            <div className="card shadow-xl w-full bg-cardColor overflow-hidden">
+                <div className="card-body py-5 h-full">
                     <h2 className="card-title mb-3">Grow your network</h2>
-                    <div className='flex flex-col gap-3'>
+                    <div className='flex flex-col gap-3 flex-wrap w-full h-full overflow-x-hidden'>
+                        <UserProfile />
+                        <UserProfile />
+                        <UserProfile />
                         <UserProfile />
                         <UserProfile />
                         <UserProfile />
