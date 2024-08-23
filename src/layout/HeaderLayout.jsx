@@ -9,7 +9,7 @@ import {
 
 const HeaderLayout = () => {
     return (
-        <div className="h-full flex-center justify-between pt-3">
+        <div className="h-full flex-center justify-between">
             <div className="left-header flex items-center gap-3 justify-between">
                 <div className="logo h-full max-h-[50px] max-w-[50px]">
                     <Logo />

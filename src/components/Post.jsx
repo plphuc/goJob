@@ -1,9 +1,11 @@
 import React from 'react'
-import { postMock } from '../mock/postMock'
+import { postsMock } from '../mock/postMock'
 import parse from 'html-react-parser'
 import { CommentIcon, Love, ShareIcon } from '../assets/svg/Svg'
 import '../assets/css/post.css'
 import { MoreOutlined } from '@ant-design/icons'
+
+const mockData = postsMock[0]
 
 const Post = () => {
     return (
@@ -12,7 +14,7 @@ const Post = () => {
                 <div className="avt">
                     <div className="avatar">
                         <div className="w-[50px] h-[50px] rounded-full">
-                            <img src={postMock.avatar} alt="avatar" />
+                            <img src={mockData.avatar} alt="avatar" />
                         </div>
                     </div>
                 </div>
@@ -22,10 +24,10 @@ const Post = () => {
                             <div>
                                 <div className="flex gap-2 items-center">
                                     <p className="font-bold text-textColor">
-                                        {postMock.name}
+                                        CONAN EDOGAWA
                                     </p>
                                     <p className="text-xs text-descriptionColor font-medium">
-                                        {postMock.username}
+                                        @fujifujigo
                                     </p>
                                 </div>
                                 <p className="text-xs text-descriptionColor">
@@ -36,8 +38,8 @@ const Post = () => {
                         </div>
                     </div>
                     <div className="post-main-content text-textColor">
-                        {parse(postMock.content)}
-                        {postMock?.postImage && <img className='mt-4 rounded-xl' src={postMock.postImage} alt='as'/>}
+                        {parse(mockData.content)}
+                        {mockData?.postImage && <img className='mt-4 rounded-xl' src={mockData.postImage} alt='as'/>}
                     </div>
                     <div className="actions flex-center justify-evenly gap-5">
                         <div className="action btn btn-active">

@@ -1,32 +1,65 @@
 import { Layout } from 'antd'
 import React from 'react'
-import HeaderLayout from '../layout/HeaderLayout'
 import SiderLayout from '../layout/SiderLayout'
-import HomeLayout from '../layout/HomeLayout'
 import RightSider from '../layout/RightSider'
+import { Photo } from '../assets/svg/Svg'
+import Post from '../components/Post'
+import MainLayout from '../layout/MainLayout'
 
-const { Header, Sider, Content } = Layout
+const { Sider, Content } = Layout
 
 const HomePage = () => {
     return (
-        <Layout className="h-full mx-10 bg-backgroundColor">
-            <Header className="bg-backgroundColor px-0 mb-5">
-                <HeaderLayout />
-            </Header>
-            <Layout className="flex-1 flex gap-5 bg-backgroundColor">
+        <MainLayout>
+            <Layout className="flex-1 flex gap-5 bg-backgroundColor mt-2">
                 <Sider width="300px" style={{ background: '#05151d' }}>
                     <SiderLayout />
                 </Sider>
                 <Layout className="h-full w-full overflow-y-auto no-scrollbar flex gap-5 bg-backgroundColor pb-4">
                     <Content className="bg-backgroundColor h-full">
-                        <HomeLayout />
+                        <div className="h-full">
+                            <div className="main-content">
+                                {/* post area */}
+                                <div className="card shadow-xl w-full bg-cardColor p-4 flex justify-start flex-row gap-5 mb-4">
+                                    <div className="avt">
+                                        <div className="avatar">
+                                            <div className="w-[50px] h-[50px] rounded-full">
+                                                <img
+                                                    src="https://images6.alphacoders.com/133/thumb-1920-1333611.jpeg"
+                                                    alt="avatar"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="flex-1">
+                                        <label className="input input-bordered flex items-center gap-2 bg-btnColor">
+                                            <input
+                                                type="text"
+                                                className="grow text-textColor"
+                                                placeholder="Share your thoughts"
+                                            />
+                                            <kbd className="kbd kbd-sm bg-transparent border-none">
+                                                <Photo customClassName="h-6 w-6" />
+                                            </kbd>
+                                        </label>
+                                    </div>
+                                </div>
+                                {/* new feed */}
+                                <div className="new-feed flex gap-2 flex-col pb-5">
+                                    <Post />
+                                    <Post />
+                                    <Post />
+                                </div>
+                            </div>
+                            <div className="right-content"></div>
+                        </div>
                     </Content>
                     <Sider width="300px" style={{ background: '#05151d' }}>
                         <RightSider />
                     </Sider>
                 </Layout>
             </Layout>
-        </Layout>
+        </MainLayout>
     )
 }
 
