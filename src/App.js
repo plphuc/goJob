@@ -5,6 +5,7 @@ import SignUpPage from './pages/SignUpPage'
 import LoginPage from './pages/LoginPage'
 import ProfilePage from './pages/ProfilePage'
 import NotFoundPage from './pages/NotFoundPage'
+import { Toaster } from 'react-hot-toast'
 
 function App() {
     return (
@@ -16,6 +17,7 @@ function App() {
                 <Route path="/profile/:userId" element={<ProfilePage />} />
                 <Route path="*" element={<NotFoundPage />} />
             </Routes>
+            <Toaster />
         </div>
     )
 }

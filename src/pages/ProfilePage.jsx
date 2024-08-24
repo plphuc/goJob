@@ -1,5 +1,4 @@
-import { Layout } from 'antd'
-import React from 'react'
+    import React from 'react'
 import MainLayout from '../layout/MainLayout'
 import {
     userEducationMock,
@@ -16,7 +15,7 @@ const ProfilePage = () => {
         (education) => education.id === userMock.educationId
     )
 
-    return (
+    return (    
         <MainLayout>
             <div className="items-start gap-5 mt-2 h-full w-full overflow-auto no-scrollbar grid 2xl:grid-cols-12">
                 <div className='flex-1 col-start-1 2xl:col-span-8 flex gap-1 flex-col'>

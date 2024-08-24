@@ -1,11 +1,16 @@
+import { useMutation } from '@apollo/client'
 import { Button, Form, Input } from 'antd'
 import { useState } from 'react'
+import { LOG_IN } from '../graphql/mutations/user.mutation'
+import toast from 'react-hot-toast'
 
 const LoginPage = () => {
     const [logInData, setLogInData] = useState({
         username: '',
         password: '',
     })
+
+    const [login, { loading, error }] = useMutation(LOG_IN)
 
     const handleChange = (e) => {
         const { id, value } = e.target
@@ -16,7 +21,16 @@ const LoginPage = () => {
     }
 
     const handleSubmit = async () => {
-
+        try {
+            await login({
+                variables: {
+                    input: logInData,
+                },
+            })
+        } catch (error) {
+            console.error('Error when log in: ', error.message)
+            toast.error(error.message)
+        }
     }
 
     return (
@@ -39,7 +53,7 @@ const LoginPage = () => {
                     rules={[
                         {
                             required: true,
-                            message: 'Please input your username!',
+                            message: 'Enter your username!',
                         },
                     ]}
                 >
@@ -53,25 +67,29 @@ const LoginPage = () => {
                     rules={[
                         {
                             required: true,
-                            message: 'Please input your password!',
+                            message: 'Enter your password!',
                         },
                     ]}
                 >
                     <Input.Password onChange={handleChange} />
                 </Form.Item>
 
+                <p className='text-red-600'>{error?.message || ''}</p>
+
                 <Form.Item>
                     <Button
                         type="primary"
                         htmlType="submit"
                         className="form-label w-full bg-black mt-3"
+                        loading={loading}
+                        disabled={loading}
                     >
                         Login
                     </Button>
                 </Form.Item>
 
                 <p className="font-normal text-gray-400 text-center">
-                    {"Don't"} have an account? <a href="/sign-up">Sign Up</a>
+                    {"Don't"} have an account? <a href="/signup">Sign Up</a>
                 </p>
             </Form>
         </div>
