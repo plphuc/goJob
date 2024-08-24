@@ -6,17 +6,18 @@ import { Photo } from '../assets/svg/Svg'
 import Post from '../components/Post'
 import MainLayout from '../layout/MainLayout'
 
-const { Sider, Content } = Layout
-
 const HomePage = () => {
     return (
         <MainLayout>
-            <Layout className="flex-1 flex gap-5 bg-backgroundColor mt-2">
-                <Sider width="300px" style={{ background: '#05151d' }}>
+            <div className="flex-1 gap-5 overflow-y-hidden bg-backgroundColor mt-2 grid 2xl:grid-cols-12">
+                <div
+                    className="h-full col-start-1 2xl:col-span-3 overflow-y-hidden"
+                    style={{ background: '#05151d' }}
+                >
                     <SiderLayout />
-                </Sider>
-                <Layout className="h-full w-full overflow-y-auto no-scrollbar flex gap-5 bg-backgroundColor pb-4">
-                    <Content className="bg-backgroundColor h-full">
+                </div>
+                <div className="h-full overflow-y-auto no-scrollbar flex gap-5 bg-backgroundColor pb-4 2xl:col-start-4 2xl:col-end-13">
+                    <div className="bg-backgroundColor h-full">
                         <div className="h-full">
                             <div className="main-content">
                                 {/* post area */}
@@ -53,12 +54,12 @@ const HomePage = () => {
                             </div>
                             <div className="right-content"></div>
                         </div>
-                    </Content>
-                    <Sider width="300px" style={{ background: '#05151d' }}>
+                    </div>
+                    <div style={{ background: '#05151d' }}>
                         <RightSider />
-                    </Sider>
-                </Layout>
-            </Layout>
+                    </div>
+                </div>
+            </div>
         </MainLayout>
     )
 }

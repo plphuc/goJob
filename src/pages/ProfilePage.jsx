@@ -15,13 +15,11 @@ const ProfilePage = () => {
     const educationMock = userEducationMock.find(
         (education) => education.id === userMock.educationId
     )
-    console.log(experienceMock)
-    console.log(educationMock)
 
     return (
         <MainLayout>
-            <div className="flex items-start gap-5 mt-2 h-full w-full overflow-auto no-scrollbar">
-                <div className='flex-1 flex gap-1 flex-col'>
+            <div className="items-start gap-5 mt-2 h-full w-full overflow-auto no-scrollbar grid 2xl:grid-cols-12">
+                <div className='flex-1 col-start-1 2xl:col-span-8 flex gap-1 flex-col'>
                     <div className="card card-compact bg-cardColor">
                         <figure className="max-h-48 relative pb-20">
                             <img
@@ -120,7 +118,7 @@ const ProfilePage = () => {
                     </div>
                     <div className="certificate"></div>
                 </div>
-                <div className="card w-96 bg-cardColor">
+                <div className="card w-96 bg-cardColor 2xl:col-start-9 2xl:col-end-13">
                     <div className="card-body">
                         <h2 className="card-title">Card title!</h2>
                         <p>If a dog chews shoes whose shoes does he choose?</p>

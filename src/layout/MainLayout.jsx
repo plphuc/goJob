@@ -5,7 +5,7 @@ import HeaderLayout from './HeaderLayout'
 
 const MainLayout = ({ children }) => {
     return (
-        <Layout className="h-full mx-10 bg-backgroundColor">
+        <Layout className="h-full bg-backgroundColor">
             <Header className="bg-backgroundColor px-0">
                 <HeaderLayout />
             </Header>
