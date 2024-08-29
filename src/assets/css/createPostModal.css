@@ -1,0 +1,21 @@
+.create-post-modal .ant-modal-content {
+    width: 90vh;
+    @apply bg-white
+}
+
+.quill .ql-container {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.quill .ql-editor {
+    @apply no-scrollbar
+}
+
+.quill .ql-toolbar {
+    @apply rounded-t-xl
+}
+
+.quill .ql-container {
+    @apply rounded-b-xl
+}
