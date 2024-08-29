@@ -9,11 +9,9 @@ const CreatePostEditor = ({content}) => {
         content.current = value
     }
 
-
     return (
         <ReactQuill
             theme="snow"
-            ref={content}
             onChange={handleChangeEditor}
             modules={editorModules}
             formats={editorFormats}

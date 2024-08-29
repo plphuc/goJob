@@ -13,17 +13,27 @@ import { useMutation } from '@apollo/client'
 import { CREATE_POST } from 'src/graphql/mutations/post.mutation'
 
 const HomePage = () => {
-    const content = useRef()
+    const content = useRef("")
     const title = useRef()
     const [isOpenCreatePostModal, setIsOpenCreatePostModal] = useState(false)
-    const [postImage, setPostImage] = useState(null)
+    const [postImage, setPostImage] = useState(undefined)
     const [createPost, { loading, error }] = useMutation(CREATE_POST)
 
     const handleUploadImage = ({ fileList }) => {
-        setPostImage(fileList[0].originFileObj)
+        setPostImage(fileList[0]?.originFileObj)
     }
 
     const handleSubmitPost = async () => {
+        if (title.current.value === '') {
+            toast.error('Title is required')
+            return
+        }
+        console.log(content.current);
+        
+        if (!content.current && !postImage) {
+            toast.error('Post must have at least content or image')
+            return
+        }
         const formData = new FormData()
         if (postImage) {
             formData.append('file', postImage)
@@ -31,11 +41,7 @@ const HomePage = () => {
 
         try {
             let postImageId = ''
-            console.log(1)
-
             if (postImage) {
-                console.log(2)
-
                 const postImageResponse = await fetch(
                     'http://localhost:4000/file',
                     {
@@ -44,19 +50,13 @@ const HomePage = () => {
                     }
                 )
                 postImageId = await postImageResponse.json()
-                console.log(3)
             }
-            console.log(4)
-            console.log(title.current.value)
-            console.log(content.current)
-            console.log(postImageId)
-
             await createPost({
                 variables: {
                     input: {
                         title: title.current.value,
                         content: content.current,
-                        imageId: postImageId,
+                        imageId: postImageId?.id,
                     },
                 },
             })
@@ -145,6 +145,7 @@ const HomePage = () => {
                                             <button
                                                 className="btn btn-sm btn-active w-[70px] rounded-full bg-textLinkColor border-textLinkColor"
                                                 onClick={handleSubmitPost}
+                                                disabled={loading}
                                             >
                                                 Post
                                             </button>
