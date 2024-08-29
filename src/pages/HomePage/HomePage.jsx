@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import SiderLayout from 'src/layout/SiderLayout'
 import RightSider from 'src/layout/RightSider'
 import Post from 'src/components/Post'
@@ -9,24 +9,60 @@ import 'src/assets/css/createPostModal.css'
 import CreatePostEditor from './components/CreatePostEditor'
 import { Photo } from 'src/assets/svg/Svg'
 import toast from 'react-hot-toast'
+import { useMutation } from '@apollo/client'
+import { CREATE_POST } from 'src/graphql/mutations/post.mutation'
 
 const HomePage = () => {
+    const content = useRef()
+    const title = useRef()
     const [isOpenCreatePostModal, setIsOpenCreatePostModal] = useState(false)
+    const [postImage, setPostImage] = useState(null)
+    const [createPost, { loading, error }] = useMutation(CREATE_POST)
 
-    const handleUploadImage = async ({ fileList }) => {
+    const handleUploadImage = ({ fileList }) => {
+        setPostImage(fileList[0].originFileObj)
+    }
+
+    const handleSubmitPost = async () => {
         const formData = new FormData()
-        formData.append('file', fileList[0].originFileObj)
-        console.log(fileList[0].originFileObj)
+        if (postImage) {
+            formData.append('file', postImage)
+        }
+
         try {
-            const response = await fetch('http://localhost:4000/file', {
-                method: 'POST',
-                body: formData,
+            let postImageId = ''
+            console.log(1)
+
+            if (postImage) {
+                console.log(2)
+
+                const postImageResponse = await fetch(
+                    'http://localhost:4000/file',
+                    {
+                        method: 'POST',
+                        body: formData,
+                    }
+                )
+                postImageId = await postImageResponse.json()
+                console.log(3)
+            }
+            console.log(4)
+            console.log(title.current.value)
+            console.log(content.current)
+            console.log(postImageId)
+
+            await createPost({
+                variables: {
+                    input: {
+                        title: title.current.value,
+                        content: content.current,
+                        imageId: postImageId,
+                    },
+                },
             })
-            const postImageId = await response.json()
-            
         } catch (error) {
             console.error(error.message)
-            toast.error(error.message)
+            toast.error("Can't create post")
         }
     }
 
@@ -106,19 +142,30 @@ const HomePage = () => {
                                             >
                                                 Cancel
                                             </button>
-                                            <button className="btn btn-sm btn-active w-[70px] rounded-full bg-textLinkColor border-textLinkColor">
+                                            <button
+                                                className="btn btn-sm btn-active w-[70px] rounded-full bg-textLinkColor border-textLinkColor"
+                                                onClick={handleSubmitPost}
+                                            >
                                                 Post
                                             </button>
                                         </div>
                                     </div>
                                 }
                                 title={
-                                    <p className="bg-white text-xl mb-3 font-semibold">
-                                        Create a Post
-                                    </p>
+                                    <>
+                                        <p className="bg-white text-xl mb-3 font-semibold">
+                                            Create a Post
+                                        </p>
+                                        <input
+                                            ref={title}
+                                            type="text"
+                                            placeholder="Enter post's title"
+                                            className="input input-bordered w-full"
+                                        />
+                                    </>
                                 }
                             >
-                                <CreatePostEditor />
+                                <CreatePostEditor content={content} />
                             </Modal>
                         </div>
                     </div>
