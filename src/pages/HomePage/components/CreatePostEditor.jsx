@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import { editorFormats, editorModules } from '../editor.static'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
@@ -12,6 +12,8 @@ const CreatePostEditor = ({content}) => {
     return (
         <ReactQuill
             theme="snow"
+            ref={content}
+            value={content.current}
             onChange={handleChangeEditor}
             modules={editorModules}
             formats={editorFormats}

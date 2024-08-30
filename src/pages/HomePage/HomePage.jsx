@@ -13,11 +13,11 @@ import { useMutation } from '@apollo/client'
 import { CREATE_POST } from 'src/graphql/mutations/post.mutation'
 
 const HomePage = () => {
-    const content = useRef("")
+    const content = useRef(null)
     const title = useRef()
     const [isOpenCreatePostModal, setIsOpenCreatePostModal] = useState(false)
     const [postImage, setPostImage] = useState(undefined)
-    const [createPost, { loading, error }] = useMutation(CREATE_POST)
+    const [createPost, { loading }] = useMutation(CREATE_POST)
 
     const handleUploadImage = ({ fileList }) => {
         setPostImage(fileList[0]?.originFileObj)
@@ -28,9 +28,7 @@ const HomePage = () => {
             toast.error('Title is required')
             return
         }
-        console.log(content.current);
-        
-        if (!content.current && !postImage) {
+        if (content.current === '<p><br></p>' && !postImage) {
             toast.error('Post must have at least content or image')
             return
         }
@@ -60,9 +58,13 @@ const HomePage = () => {
                     },
                 },
             })
+            toast.success('Create post successfully')
         } catch (error) {
             console.error(error.message)
             toast.error("Can't create post")
+        } finally {
+            title.current.value = ''
+            content.current = null
         }
     }
 
@@ -119,7 +121,7 @@ const HomePage = () => {
                             <Modal
                                 className="create-post-modal"
                                 destroyOnClose={true}
-                                open={true}
+                                open={isOpenCreatePostModal}
                                 onCancel={() => setIsOpenCreatePostModal(false)}
                                 footer={
                                     <div className="flex justify-between items-center">
@@ -161,7 +163,7 @@ const HomePage = () => {
                                             ref={title}
                                             type="text"
                                             placeholder="Enter post's title"
-                                            className="input input-bordered w-full"
+                                            className="input input-bordered w-full rounded-xl"
                                         />
                                     </>
                                 }
