@@ -1,0 +1,65 @@
+.info-form-wrapper * {
+    font-size: 12px;
+    color: black;
+}
+
+.title-field {
+    color: black;
+    font-weight: 700;
+    text-align: center;
+}
+
+.input-form {
+    border: none;
+    padding: 0 5px;
+    width: 100%;
+    text-align: left;
+    color: black;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.separator {
+    background: black;
+    width: 50%;
+    height: 1px;
+}
+
+*[contentEditable='true']:empty:not(:focus)::before {
+    content: attr(data-placeholder);
+    pointer-events: none;
+}
+
+.field-form {
+    width: 100%;
+}
+
+.general-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.name-info {
+    font-weight: 700;
+}
+
+.date {
+    display: flex;
+    justify-content: space-between;
+}
+
+.detail-info {
+    margin: 0 20px;
+    padding: 0 12px;
+}
+
+.detail-info li {
+    list-style-type: disc;
+}
+
+[contentEditable='true']:focus {
+    outline-style: dotted;
+}

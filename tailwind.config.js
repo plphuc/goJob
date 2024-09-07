@@ -25,4 +25,7 @@ module.exports = {
         },
     },
     plugins: [require('daisyui')],
+    corePlugins: {
+        preflight: true
+    }
 }

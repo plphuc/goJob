@@ -9,7 +9,7 @@
 }
 
 .quill .ql-editor {
-    @apply no-scrollbar
+    @apply: no-scrollbar
 }
 
 .quill .ql-toolbar {

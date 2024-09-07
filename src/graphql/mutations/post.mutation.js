@@ -7,24 +7,24 @@ export const CREATE_POST = gql`
             title
             content
             createdDate
-            imageId
+            imageUrl
         }
     }
 `
 
 export const EDIT_POST = gql`
-    mutation editPost($input: EditPostInput!) {
+    mutation EditPost($input: EditPostInput!) {
         editPost(input: $input) {
             title
             createdDate
             content
-            imageId
+            imageUrl
         }
     }
 `
 
 export const DELETE_POST = gql`
-    mutation deletePost($input: DeletePostInput!) {
+    mutation DeletePost($input: DeletePostInput!) {
         deletePost(input: $input) {
             _id
         }

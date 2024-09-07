@@ -1,60 +1,62 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import SiderLayout from 'src/layout/SiderLayout'
 import RightSider from 'src/layout/RightSider'
 import Post from 'src/components/Post'
 import MainLayout from 'src/layout/MainLayout'
 import { SendOutlined } from '@ant-design/icons'
-import { Modal, Upload } from 'antd'
 import 'src/assets/css/createPostModal.css'
-import CreatePostEditor from './components/CreatePostEditor'
-import { Photo } from 'src/assets/svg/Svg'
 import toast from 'react-hot-toast'
-import { useMutation } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
 import { CREATE_POST } from 'src/graphql/mutations/post.mutation'
+import { GET_POSTS } from 'src/graphql/queries/post.query'
+import EditPostModal from './components/EditPostModal'
 
 const HomePage = () => {
-    const content = useRef(null)
-    const title = useRef()
-    const [isOpenCreatePostModal, setIsOpenCreatePostModal] = useState(false)
+    const [content, setContent] = useState(undefined)
+    const [title, setTitle] = useState(undefined)
     const [postImage, setPostImage] = useState(undefined)
-    const [createPost, { loading }] = useMutation(CREATE_POST)
+    const [isOpenCreatePostModal, setIsOpenEditPostModal] = useState(false)
 
-    const handleUploadImage = ({ fileList }) => {
-        setPostImage(fileList[0]?.originFileObj)
+    const { data: posts, loading, error } = useQuery(GET_POSTS)
+    const [createPost] = useMutation(CREATE_POST, {
+        refetchQueries: [GET_POSTS ]
+    })
+
+    const handleUploadFile = (e) => {
+        setPostImage(e.target.value)
     }
 
     const handleSubmitPost = async () => {
-        if (title.current.value === '') {
+        if (title === '') {
             toast.error('Title is required')
             return
         }
-        if (content.current === '<p><br></p>' && !postImage) {
+        if (content === '<p><br></p>' && !postImage) {
             toast.error('Post must have at least content or image')
             return
         }
-        const formData = new FormData()
-        if (postImage) {
-            formData.append('file', postImage)
-        }
+        // const formData = new FormData()
+        // if (postImage) {
+        //     formData.append('file', postImage)
+        // }
 
         try {
-            let postImageId = ''
-            if (postImage) {
-                const postImageResponse = await fetch(
-                    'http://localhost:4000/file',
-                    {
-                        method: 'POST',
-                        body: formData,
-                    }
-                )
-                postImageId = await postImageResponse.json()
-            }
+            // let postImageId = ''
+            // if (postImage) {
+            //     const postImageResponse = await axiosHelper({
+            //         url: '/file',
+            //         method: 'POST',
+            //         body: formData,
+            //     })
+            //     postImageId = await postImageResponse.json()
+            // }
+
             await createPost({
                 variables: {
                     input: {
-                        title: title.current.value,
-                        content: content.current,
-                        imageId: postImageId?.id,
+                        title,
+                        content,
+                        imageUrl: postImage,
                     },
                 },
             })
@@ -63,8 +65,9 @@ const HomePage = () => {
             console.error(error.message)
             toast.error("Can't create post")
         } finally {
-            title.current.value = ''
-            content.current = null
+            setTitle(undefined)
+            setContent(undefined)
+            setPostImage(undefined)
         }
     }
 
@@ -77,7 +80,7 @@ const HomePage = () => {
                 >
                     <SiderLayout />
                 </div>
-                <div className="h-full overflow-y-auto no-scrollbar flex gap-5 bg-backgroundColor pb-4 2xl:col-start-4 2xl:col-end-13">
+                <div className="h-full overflow-y-auto flex gap-5 bg-backgroundColor pb-4 2xl:col-start-4 2xl:col-end-13">
                     <div className="bg-backgroundColor h-full">
                         <div className="h-full">
                             <div className="main-content">
@@ -97,7 +100,7 @@ const HomePage = () => {
                                         <div
                                             className="input input-bordered flex items-center gap-2 bg-btnColor"
                                             onClick={() =>
-                                                setIsOpenCreatePostModal(true)
+                                                setIsOpenEditPostModal(true)
                                             }
                                         >
                                             <input
@@ -109,67 +112,37 @@ const HomePage = () => {
                                                 <SendOutlined className="text-lg" />
                                             </kbd>
                                         </div>
+                                        <EditPostModal
+                                            content={content}
+                                            onChangeContent={(value) =>
+                                                setContent(value)
+                                            }
+                                            isOpenCreatePostModal={
+                                                isOpenCreatePostModal
+                                            }
+                                            onCloseModal={() => {
+                                                setTitle(undefined)
+                                                setContent(undefined)
+                                                setPostImage(undefined)
+                                                setIsOpenEditPostModal(false)
+                                            }}
+                                            onUploadFile={handleUploadFile}
+                                            onSubmitPost={handleSubmitPost}
+                                            title={title}
+                                            onChangeTitle={(value) =>
+                                                setTitle(value)
+                                            }
+                                        />
                                     </div>
                                 </div>
                                 {/* new feed */}
                                 <div className="new-feed flex gap-2 flex-col pb-5">
-                                    <Post />
-                                    <Post />
-                                    <Post />
+                                    {posts &&
+                                        posts.getPosts.map((post) => (
+                                            <Post key={post._id} post={post} />
+                                        ))}
                                 </div>
                             </div>
-                            <Modal
-                                className="create-post-modal"
-                                destroyOnClose={true}
-                                open={isOpenCreatePostModal}
-                                onCancel={() => setIsOpenCreatePostModal(false)}
-                                footer={
-                                    <div className="flex justify-between items-center">
-                                        <Upload
-                                            beforeUpload={() => false}
-                                            onChange={handleUploadImage}
-                                            className="cursor-pointer flex items-center justify-center rounded-md border"
-                                            maxCount={1}
-                                        >
-                                            <Photo customClassName="h-6 w-6 m-1" />
-                                        </Upload>
-                                        <div className="flex items-center gap-1 justify-end">
-                                            <button
-                                                className="btn btn-sm btn-outline w-[70px] rounded-full border-textLinkColor"
-                                                onClick={() =>
-                                                    setIsOpenCreatePostModal(
-                                                        false
-                                                    )
-                                                }
-                                            >
-                                                Cancel
-                                            </button>
-                                            <button
-                                                className="btn btn-sm btn-active w-[70px] rounded-full bg-textLinkColor border-textLinkColor"
-                                                onClick={handleSubmitPost}
-                                                disabled={loading}
-                                            >
-                                                Post
-                                            </button>
-                                        </div>
-                                    </div>
-                                }
-                                title={
-                                    <>
-                                        <p className="bg-white text-xl mb-3 font-semibold">
-                                            Create a Post
-                                        </p>
-                                        <input
-                                            ref={title}
-                                            type="text"
-                                            placeholder="Enter post's title"
-                                            className="input input-bordered w-full rounded-xl"
-                                        />
-                                    </>
-                                }
-                            >
-                                <CreatePostEditor content={content} />
-                            </Modal>
                         </div>
                     </div>
                     <div style={{ background: '#05151d' }}>

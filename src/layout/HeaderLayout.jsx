@@ -40,7 +40,7 @@ const HeaderLayout = () => {
                         </a>
                     </button>
                     <button className="btn btn-ghost text-textColor px-2">
-                        <a href="/my-network">
+                        <a href="/createCv">
                             <PlusCircleFilled className="text-2xl" />
                             <p className="mt-1">Create CV</p>
                         </a>
