@@ -1,6 +1,7 @@
 import React from 'react'
 import './InfoForm.css'
 import DetailsInfoForm from './DetailsInfoForm'
+import ContactInfo from './ContactInfo'
 
 const InfoForm = () => {
     const handleChangeText = (e) => {
@@ -17,20 +18,14 @@ const InfoForm = () => {
                 ></p>
             </div>
             <div className="separator"></div>
-            <div className="field-form persona-info">
-                <p
-                    className="input-form  !text-center"
-                    contentEditable={true}
-                    onChange={handleChangeText}
-                    data-placeholder="Enter your contact information"
-                ></p>
-            </div>
+            <div className="field-form persona-info"><ContactInfo /></div>
             <div className="field-form career-object">
                 <p className='title-field'>Career Objective</p>
                 <p
                     className="input-form !text-center"
                     contentEditable={true}
                     onChange={handleChangeText}
+                    data-placeholder="Your career objective"
                 ></p>
             </div>
             <div className="field-form education">

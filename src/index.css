@@ -37,6 +37,10 @@
         justify-content: center;
         align-items: center;
     }
+
+    .w-unset {
+        width: unset;
+    }
 }
 
 @layer utilities {

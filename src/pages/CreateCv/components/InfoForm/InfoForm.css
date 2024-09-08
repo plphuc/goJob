@@ -15,10 +15,6 @@
     width: 100%;
     text-align: left;
     color: black;
-
-    &:focus {
-        outline: none;
-    }
 }
 
 .separator {
@@ -62,4 +58,10 @@
 
 [contentEditable='true']:focus {
     outline-style: dotted;
+    outline-width: 1px;
+}
+
+.contact-info-item {
+    display: list-item;
+    list-style: disc outside none;
 }

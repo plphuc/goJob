@@ -1,87 +1,81 @@
-import { useEffect, useRef, useState } from 'react'
-import './InfoForm.css'
+import { useEffect, useRef, useState } from 'react';
+import './InfoForm.css';
 
 const DetailsInfoForm = () => {
-    const [experienceList, setExperienceList] = useState([''])
-    const focusExperienceLRef = useRef('')
+    const [experienceList, setExperienceList] = useState(['']);
+    const focusExperienceLRef = useRef(null);
+    const lastFocusedIndex = useRef(0)
 
     const handleAddBulletItem = (e) => {
-        if (e.keyCode === 13) {
-            e.preventDefault()
-            setExperienceList([
-                ...experienceList.slice(0, focusExperienceLRef.tabIndex + 1),
+        const currentTabIndex = e.target.tabIndex;
+
+        if (e.keyCode === 8) {
+            // Prevent removal if list has 1 item or if the current item is focused
+            if (experienceList.length === 1 || currentTabIndex === 0) {
+                return;
+            }
+
+            // Remove item from the list
+            setExperienceList(prevList => [
+                ...prevList.slice(0, currentTabIndex),
+                ...prevList.slice(currentTabIndex + 1),
+            ]);
+            lastFocusedIndex.current = currentTabIndex - 1
+        } else if (e.keyCode === 13) {
+            e.preventDefault();
+
+            // Add new item to the list
+            setExperienceList(prevList => [
+                ...prevList.slice(0, currentTabIndex + 1),
                 '',
-                ...experienceList.slice(focusExperienceLRef.tabIndex + 2),
-            ])
+                ...prevList.slice(currentTabIndex + 1),
+            ]);
+            lastFocusedIndex.current = currentTabIndex + 1
         }
-    }
+    };
 
     useEffect(() => {
-        console.log(focusExperienceLRef.current)
+        // Focus on the last focused index after list change
         if (focusExperienceLRef.current) {
-            focusExperienceLRef.current.focus()
+            focusExperienceLRef.current.focus();
         }
-    }, [experienceList])
+    }, [experienceList]);
 
     return (
         <div>
             <div className="general-info">
                 <div className="name-info">
-                    <div
-                        className="contenteditable organization-name"
-                        data-placeholder="Enter your organization's name"
-                    >
-                        <p contentEditable></p>
-                    </div>
-                    <p
-                        className="title"
-                        contentEditable
-                        data-placeholder="Enter your position"
-                    ></p>
+                    <p className="contenteditable organization-name" data-placeholder="Organization" contentEditable></p>
+                    <p className="title" contentEditable data-placeholder="Position Title"></p>
                 </div>
                 <div className="location-date-info">
-                    <p
-                        className="location"
-                        contentEditable
-                        data-placeholder="Enter your work location"
-                    ></p>
+                    <p className="location" contentEditable data-placeholder="City, Country"></p>
                     <p className="date">
-                        <span
-                            contentEditable
-                            data-placeholder="Enter start date"
-                        ></span>
+                        <span contentEditable data-placeholder="Month, Year"></span>
                         <span>-</span>
-                        <span
-                            contentEditable={true}
-                            data-placeholder="Enter end date"
-                        ></span>
+                        <span contentEditable data-placeholder="Month, Year"></span>
                     </p>
                 </div>
             </div>
             <div onKeyDown={handleAddBulletItem}>
                 <ul className="detail-info">
-                    {experienceList.map((experience, idx) => {
-                        return (
-                            <li
-                                key={idx}
-                                contentEditable={true}
-                                value={experience}
-                                tabIndex={idx}
-                                onFocus={(input) =>
-                                    (focusExperienceLRef.current = input.target)
+                    {experienceList.map((experience, idx) => (
+                        <li
+                            key={idx}
+                            contentEditable
+                            tabIndex={idx}
+                            ref={el => {
+                                if (el?.tabIndex === lastFocusedIndex.current) {
+                                    focusExperienceLRef.current = el;
                                 }
-                                ref={
-                                    (focusExperienceLRef.current === '' || idx === focusExperienceLRef.current?.tabIndex)  + 1
-                                        ? (input) => focusExperienceLRef.current = input
-                                        : undefined
-                                }
-                            ></li>
-                        )
-                    })}
+                            }}
+                        >
+                        </li>
+                    ))}
                 </ul>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default DetailsInfoForm
+export default DetailsInfoForm;
