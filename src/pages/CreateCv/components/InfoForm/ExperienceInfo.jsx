@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import './InfoForm.css';
 
-const DetailsInfoForm = () => {
+const ExperienceInfo = () => {
     const [experienceList, setExperienceList] = useState(['']);
     const focusExperienceLRef = useRef(null);
     const lastFocusedIndex = useRef(0)
@@ -23,8 +23,6 @@ const DetailsInfoForm = () => {
             lastFocusedIndex.current = currentTabIndex - 1
         } else if (e.keyCode === 13) {
             e.preventDefault();
-
-            // Add new item to the list
             setExperienceList(prevList => [
                 ...prevList.slice(0, currentTabIndex + 1),
                 '',
@@ -78,4 +76,4 @@ const DetailsInfoForm = () => {
     );
 };
 
-export default DetailsInfoForm;
+export default ExperienceInfo;

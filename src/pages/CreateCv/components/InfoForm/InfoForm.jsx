@@ -1,7 +1,9 @@
 import React from 'react'
 import './InfoForm.css'
-import DetailsInfoForm from './DetailsInfoForm'
+import ExperienceInfo from './ExperienceInfo'
 import ContactInfo from './ContactInfo'
+import EducationInfo from './EducationInfo'
+import ProjectInfo from './ProjectInfo'
 
 const InfoForm = () => {
     const handleChangeText = (e) => {
@@ -30,25 +32,15 @@ const InfoForm = () => {
             </div>
             <div className="field-form education">
                 <p className="title-field">Education</p>
-                <p
-                    className="input-form"
-                    contentEditable={true}
-                    onChange={handleChangeText}
-                    data-placeholder="Enter your educations"
-                ></p>
+                <EducationInfo />
             </div>
             <div className="field-form experience">
                 <p className="title-field">Experience</p>
-                <DetailsInfoForm />
+                <ExperienceInfo />
             </div>
             <div className="field-form project">
                 <p className="title-field">Projects</p>
-                <p
-                    className="input-form"
-                    contentEditable={true}
-                    onChange={handleChangeText}
-                    data-placeholder="Enter your projects"
-                ></p>
+                <ProjectInfo />
             </div>
             <div className="field-form skills">
                 <p className="title-field">Skills</p>
