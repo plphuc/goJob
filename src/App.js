@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useLocation } from 'react-router-dom'
 import './App.css'
 import HomePage from './pages/HomePage/HomePage'
 import SignUpPage from './pages/SignUpPage'
@@ -9,8 +9,10 @@ import { Toaster } from 'react-hot-toast'
 import CreateCv from './pages/CreateCv/CreateCv'
 
 function App() {
+    const location = useLocation()
+    
     return (
-        <div className="container mx-auto h-full overflow-auto text-textColor">
+        <div className={`${location.pathname === '/createCv' ? '' : 'container'} mx-auto h-full overflow-auto text-textColor`}>
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/signup" element={<SignUpPage />} />

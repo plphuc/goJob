@@ -4,6 +4,9 @@ import PDFToRender from './components/PDFToRender'
 import { PDFDownloadLink } from '@react-pdf/renderer'
 import PDFElements from './components/PDFElements'
 import InfoForm from './components/InfoForm/InfoForm'
+import { Layout } from 'antd'
+import { Header } from 'antd/es/layout/layout'
+import HeaderLayout from 'src/layout/HeaderLayout'
 
 /* <PDFDownloadLink document={<PDFToRender/>} fileName="somename.pdf">
     <button>
@@ -13,9 +16,12 @@ import InfoForm from './components/InfoForm/InfoForm'
 
 const CreateCv = () => {
     return (
-        <MainLayout>
+        <Layout className="bg-backgroundColor">
+            <Header className="bg-backgroundColor px-3">
+                <HeaderLayout />
+            </Header>
             <InfoForm />
-        </MainLayout>
+        </Layout>
     )
 }
 

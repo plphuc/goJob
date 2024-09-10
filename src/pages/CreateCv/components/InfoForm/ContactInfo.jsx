@@ -6,13 +6,12 @@ const ContactInfo = () => {
     const lastFocusedIndex = useRef(0)
 
     const [contactInfoList, setContactInfoList] = useState([''])
-    const [isFocus, setIsFocus] = useState(false)
 
     const handleModifyContactInfoList = (e) => {
         const currentTabIndex = e.target.tabIndex
         if (e.keyCode === 8) {
             // not allow remove when list has 1 item/Current Ref in tabIndex 0
-            if (contactInfoList.length === 1 || e.target.tabIndex === 0) {
+            if (contactInfoList.length === 1 || e.target.tabIndex === 0 || e.target.innerText !== '') {
                 return
             }            
 
@@ -46,29 +45,30 @@ const ContactInfo = () => {
             <div
                 className="flex justify-center flex-1"
                 onKeyDown={handleModifyContactInfoList}
-                onClick={() => setIsFocus(true)}
-                onBlur={() => setIsFocus(false)}
             >
-                {(contactInfoList.length > 1 && contactInfoList[0] === '') ||  isFocus === true
-                ? contactInfoList.map((contactInfo, idx) => {
+                {contactInfoList.map((contactInfo, idx) => {
                     return (
                         <li key={idx} className="list-disc min-w-[100px]">
                             <span
                                 key={idx}
-                                className="input-form !w-unset focus:outline-none relative -left-3"
+                                className="input-form !w-unset focus:outline-none relative -left-2"
                                 contentEditable={true}
                                 defaultValue={contactInfo}
+                                data-placeholder={contactInfoList.length === 1 && contactInfoList[0] === ''
+                                    && 'Home or Campus Street Address • City, State Zip • youremail@college.harvard.edu • phone number'}
                                 tabIndex={idx}
-                                ref={(el) => {
+                                ref={(el) => {                                    
                                     if (el?.tabIndex === lastFocusedIndex.current) {
                                         currentContactInfoRef.current = el
+                                        if(contactInfoList[0] === '' && contactInfoList.length === 1) {
+                                            currentContactInfoRef.current.focus()
+                                        }
                                     }
                                 }}
                             ></span>
                         </li>
                     )
-                }) 
-                : <p>Detail Contact Information</p>}
+                })}
             </div>
         </div>
     )

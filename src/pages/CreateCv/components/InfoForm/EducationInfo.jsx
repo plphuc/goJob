@@ -1,3 +1,4 @@
+import { DEGREE_EDUCATION_PLACEHOLDER, DESCRIBE_EDUCATION_PLACEHOLDER } from 'src/assets/constant'
 import './InfoForm.css'
 
 const EducationInfo = () => {
@@ -13,16 +14,16 @@ const EducationInfo = () => {
                     <p
                         className="title"
                         contentEditable
-                        data-placeholder="Degree"
+                        data-placeholder={DEGREE_EDUCATION_PLACEHOLDER}
                     ></p>
                 </div>
-                <div className="location-date-info">
+                <div className="location-date-info flex flex-col items-end">
                     <p
-                        className="location"
+                        className="location w-full text-right"
                         contentEditable
                         data-placeholder="City, Country"
                     ></p>
-                    <p className="date">
+                    <p className="date w-full text-right">
                         <span
                             className="w-full"
                             contentEditable
@@ -34,7 +35,7 @@ const EducationInfo = () => {
             <div className="education-details">
                 <p
                     contentEditable
-                    data-placeholder="Describe your study"
+                    data-placeholder={DESCRIBE_EDUCATION_PLACEHOLDER}
                     onInput={(e) => {
                         console.log(e)
                     }}

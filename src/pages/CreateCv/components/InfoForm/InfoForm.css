@@ -11,7 +11,6 @@
 
 .input-form {
     border: none;
-    padding: 0 5px;
     width: 100%;
     text-align: left;
     color: black;
@@ -26,6 +25,7 @@
 *[contentEditable='true']:empty:not(:focus)::before {
     content: attr(data-placeholder);
     pointer-events: none;
+    font-size: 12px;
 }
 
 .field-form {
@@ -47,18 +47,9 @@
     justify-content: space-between;
 }
 
-.detail-info {
-    margin: 0 20px;
-    padding: 0 12px;
-}
-
-.detail-info li {
-    list-style-type: disc;
-}
-
 [contentEditable='true']:focus {
-    outline-style: dotted;
-    outline-width: 1px;
+    outline: none;
+    margin-bottom: 2px;
 }
 
 .contact-info-item {
