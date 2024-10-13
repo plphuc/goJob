@@ -80,7 +80,7 @@ const HomePage = () => {
                 >
                     <SiderLayout />
                 </div>
-                <div className="h-full overflow-y-auto flex gap-5 bg-backgroundColor pb-4 2xl:col-start-4 2xl:col-end-13">
+                <div className="h-full overflow-y-auto flex gap-5 bg-backgroundColor pb-4 2xl:col-start-4 2xl:col-end-13 pr-2">
                     <div className="bg-backgroundColor h-full">
                         <div className="h-full">
                             <div className="main-content">
