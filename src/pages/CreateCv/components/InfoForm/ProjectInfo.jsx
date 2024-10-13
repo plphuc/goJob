@@ -5,7 +5,7 @@ const ProjectInfo = () => {
     const [projectList, setProjectList] = useState([['']])
     return (
         <div>
-            <div className="general-info">
+            <div className="general-info mt-3">
                 <div className="name-info min-w-[100px]">
                     <p
                         className="contenteditable w-full"

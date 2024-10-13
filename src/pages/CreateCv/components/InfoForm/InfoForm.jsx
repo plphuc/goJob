@@ -1,15 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './InfoForm.css'
 import ExperienceInfo from './ExperienceInfo'
 import ContactInfo from './ContactInfo'
 import EducationInfo from './EducationInfo'
 import ProjectInfo from './ProjectInfo'
 import { CAREER_OBJECTIVE_PLACEHOLDER } from 'src/assets/constant'
+import { PlusOutlined } from '@ant-design/icons'
+import { userEducationMock } from 'src/mock/userMock'
+import Skills from './Skills'
 
 const InfoForm = () => {
+    const [educationList, setEducationList] = useState(userEducationMock)
+    const [skills, setSkills] = useState('<span><b>Daisy</b>: try your best. good luck</span>')
     const handleChangeText = (e) => {
         console.log(e.target.innerText)
     }
+    
     return (
        <div className='info-form-wrapper bg-white my-8 w-[210mm] h-[297mm] inline-block p-12 self-center'>
             <div className="flex flex-col items-center ">
@@ -33,8 +39,13 @@ const InfoForm = () => {
                     ></p>
                 </div>
                 <div className="field-form education mt-3">
-                    <p className="title-field">Education</p>
-                    <EducationInfo />
+                    <div className='flex justify-between items-center'>
+                        <p className="title-field flex-1 text-center">Education</p>
+                        <div className='cursor-pointer'><PlusOutlined /></div>
+                    </div>
+                    {educationList.map(educationInfo => {
+                        return <EducationInfo educationInfo={educationInfo} />
+                    })}
                 </div>
                 <div className="field-form experience mt-3">
                     <p className="title-field">Experience</p>
@@ -46,12 +57,7 @@ const InfoForm = () => {
                 </div>
                 <div className="field-form skills mt-3">
                     <p className="title-field">Skills</p>
-    
-                    <p
-                        className="input-form"
-                        contentEditable={true}
-                        onChange={handleChangeText}
-                    ></p>
+                    <Skills skills={skills} onChangeSkills={updatedSkills => setSkills(updatedSkills)} />
                 </div>
             </div>
        </div>

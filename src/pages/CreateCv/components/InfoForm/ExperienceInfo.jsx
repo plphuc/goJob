@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import './InfoForm.css'
 import BulletListFeature from 'src/components/common/BulletListFeature'
 
@@ -7,7 +7,7 @@ const ExperienceInfo = () => {
 
     return (
         <div>
-            <div className="general-info">
+            <div className="general-info mt-3">
                 <div className="name-info">
                     <p
                         className="contenteditable organization-name"

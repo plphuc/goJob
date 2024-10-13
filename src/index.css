@@ -9,7 +9,7 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-    background: #04151d;
+    background: #f1f1f1;
 }
 
 /* Handle */
@@ -20,7 +20,7 @@
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: #6c6c6c;
+    background: #555;
 }
 
 * {

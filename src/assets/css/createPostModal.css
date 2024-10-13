@@ -6,6 +6,7 @@
 .quill .ql-container {
     flex: 1;
     overflow-y: auto;
+    @apply rounded-b-xl
 }
 
 .quill .ql-editor {
@@ -16,6 +17,6 @@
     @apply rounded-t-xl
 }
 
-.quill .ql-container {
-    @apply rounded-b-xl
+.ql-container {
+   overflow-y: hidden!important;
 }
