@@ -11,7 +11,7 @@ import Skills from './Skills'
 
 const InfoForm = () => {
     const [educationList, setEducationList] = useState(userEducationMock)
-    const [skills, setSkills] = useState('<span><b>Daisy</b>: try your best. good luck</span>')
+    const [skills, setSkills] = useState('<span><b>Daisy</b>: try your best. good luck</span><div>ồ ô</div><div><b>boo</b></div><div><b>i</b></div><div><b>fhkdsh</b></div><div><b>sdls</b></div>')
     const handleChangeText = (e) => {
         console.log(e.target.innerText)
     }
@@ -43,8 +43,8 @@ const InfoForm = () => {
                         <p className="title-field flex-1 text-center">Education</p>
                         <div className='cursor-pointer'><PlusOutlined /></div>
                     </div>
-                    {educationList.map(educationInfo => {
-                        return <EducationInfo educationInfo={educationInfo} />
+                    {educationList.map((educationInfo, index) => {
+                        return <EducationInfo key={index} educationInfo={educationInfo} />
                     })}
                 </div>
                 <div className="field-form experience mt-3">

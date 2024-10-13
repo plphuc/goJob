@@ -12,7 +12,7 @@ import HeaderLayout from 'src/layout/HeaderLayout'
     <button>
         loading ? 'Loading document...' : 'Download now!'
     </button>
-</PDFDownloadLink> */
+</PDFDownloadLink> */ 
 
 const CreateCv = () => {
     return (
